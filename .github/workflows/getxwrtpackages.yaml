@@ -90,7 +90,9 @@ jobs:
           echo "REPO=https://${GITHUB_ACTOR}:${{secrets.PAT}}@github.com/${GITHUB_REPOSITORY}.git" >> $GITHUB_ENV
           echo "BRANCH=${GITHUB_REF/#refs\/heads\//}" >> $GITHUB_ENV
           echo "${GITHUB_ACTOR}'s Working directory is '$(pwd)' GITHUB_WORKSPACE=$GITHUB_WORKSPACE BRANCH=$BRANCH"
-          # echo "before merge"
+      - name: fetch this repo
+        run: |
+          echo $REPO
           git remote add origin $REPO
           git fetch origin -a
           echo "CURRENT_TAG=$(git describe --tags `git for-each-ref --format="%(refname)" --sort=-creatordate --count=1 refs/tags`)" >> $GITHUB_ENV
