@@ -68,7 +68,7 @@ jobs:
       - name: check out the latest tag
         run: |
           # check out to latest tag
-          echo "LATEST_TAG now : ${{env.LATEST_TAG}}"
+          # echo "LATEST_TAG now : ${{env.LATEST_TAG}}"
           git checkout tags/${{env.LATEST_TAG}}
           # echo "Makefile of abblock"
           # cat net/simple-adblock/Makefile | grep "PKG_RELEASE"
@@ -92,14 +92,10 @@ jobs:
           echo "${GITHUB_ACTOR}'s Working directory is '$(pwd)' GITHUB_WORKSPACE=$GITHUB_WORKSPACE BRANCH=$BRANCH"
       - name: fetch this repo
         run: |
-          echo $REPO
+          # echo $REPO
           git remote add origin $REPO
           git fetch origin -a
           echo "CURRENT_TAG=$(git describe --tags `git for-each-ref --format="%(refname)" --sort=-creatordate --count=1 refs/tags`)" >> $GITHUB_ENV
-      - name: echo latest and current version
-        run: |
-          echo "LATEST_TAG : ${{env.LATEST_TAG}}"
-          echo "CURRENT_TAG: ${{env.CURRENT_TAG}}"
       - if: ${{env.LATEST_TAG > env.CURRENT_TAG}}
         name: push if new tag arrived
         run: |
